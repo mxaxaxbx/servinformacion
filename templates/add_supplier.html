@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Agregar Proveedor</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+	{% include 'layouts/nav.html' %}
+	<div class="container">
+		{% include 'layouts/alerts.html' %}
+		<form class="panel panel-primary" action="/home/suppliers/add" method="POST">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<h1 class="text-center">Agregar Proveedor</h1>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="name" class="text-primary">(*) Nombre</label>
+					<input type="text" name="name" id="name" class="form-control" placeholder="Ingrese el nombre del Proveedor" required autofocus />
+				</div>
+				<div class="form-group">
+					<label for="address" class="text-primary">Dirección</label>
+					<input type="text" name="address" id="address" class="form-control" placeholder="Ingrese la dirección del Proveedor" />
+				</div>
+				<div class="form-group">
+					<label for="phone" class="text-primary">Teléfono</label>
+					<input type="text" name="phone" id="phone" class="form-control" placeholder="Ingrese el teléfono del Proveedor" />
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success pull-right">Agregar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

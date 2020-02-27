@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Iniciar Sesión</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-index">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<a class="navbar-brand" href="/">Sistema Simple de Inventarios</a>
+    		</div>
+    		<a href="/login" class="btn btn-primary pull-right">Entrar</a>
+  		</div><!-- /.container-fluid -->
+	</nav>
+
+	<div class="panel-center">
+		{% include 'layouts/alerts.html' %}
+		<h1 class="text-center text-primary">Iniciar Sesión</h1>
+		<form action="/login" method="POST">
+			<div class="form-group">
+				<label for="email" class="text-primary">Correo electrónico:</label>
+				<input type="email" name="email" id="email" class="form-control" placeholder="Ingrese su correo electrónico" required autofocus />
+			</div>
+			<div class="form-group">
+				<label for="pass" class="text-primary">Contaseña:</label>
+				<input type="password" name="password" id="pass" class="form-control" placeholder="Ingrese su contraseña" required />
+			</div>
+			<div class="form-group">
+				<a href="/" class="btn btn-primary">Inicio</a>
+				<button type="submit" class="btn btn-success pull-right">Ingresar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

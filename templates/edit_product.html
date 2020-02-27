@@ -1,0 +1,199 @@
+<html>
+<head>
+	<title>Modificar Producto</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+	{% include 'layouts/nav.html' %}
+	<div class="container">
+		{% include 'layouts/alerts.html' %}
+		<form class="panel panel-primary" action="/home/products/update/basics/{{doc._id}}" method="POST">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<h1 class="text-center">Modificar Producto</h1>
+				</div>
+			</div>
+			<div class="panel-body">
+				<a href="/home/products" class="btn btn-primary">Atras</a>
+				<div class="form-group">
+					<label for="name" class="text-primary">(*) Nombre</label>
+					<input type="text" name="name" id="name" class="form-control" value="{{doc.name}}" placeholder="Ingrese el nombre del Producto" required autofocus />
+				</div>
+
+				<div class="form-group">
+					<label for="supplier" class="text-primary">(*) Proveedor</label>
+					<select id="supplier" name="supplier" class="form-control " required>
+						<option disabled selected>Seleccione un Proveedor</option>
+						{% for sup in sups %}
+						<option value="{{sup._id}}" {% if sup._id == doc.supplier %}selected="true"{% endif %}>{{sup.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="description" class="text-primary">Descripción</label>
+					<textarea name="description" id="description" class="form-control" placeholder="Ingrese la descripción del Producto">{{doc.description}}</textarea>
+				</div>
+				<div class="col-md-12">
+					<hr/>
+				</div>
+				<div class="col-lg-4">
+					<label class="text-primary">Cantidad:</label>
+					<p class="text-warning h3"><b>{{doc.quantity}} Unidades</b></p>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editQuant">Agregar Unidades</button>
+				</div>
+				<div class="col-lg-4">
+					<label class="text-primary">Saldo Total:</label>
+					<p class="text-success h3"><b>${{doc.balance}}</b></p>
+				</div>
+				<div class="col-lg-4">
+					<label for="price" class="text-primary">Precio Total:</label>
+					<p class="text-success h3"><b>${{doc.price}}</b></p>
+				</div>
+				<div class="col-md-12">
+					<hr/>
+				</div>
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-4">
+					<label class="text-primary">Saldo X Unidad:</label>
+					<p class="text-success h3"><b>${{doc.unity_balance}}</b></p>
+				</div>
+				<div class="col-lg-4">
+					<labelclass="text-primary">Precio X Unidad:</label>
+					<p class="text-success h3"><b>${{doc.unity_price}}</b></p>
+				</div>
+				<div class="col-md-12">
+					<hr/>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-6">
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
+					</div>
+					<button type="submit" class="btn btn-success pull-right">Modificar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal fade" id="editQuant" tabindex="-1" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<form class="modal-content" action="/home/products/update/price/{{doc._id}}" method="POST">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title">Editar Unidades del STOCK</h4>
+      			</div>
+      			<div class="modal-body">
+					<div class="col-lg-4">
+						<label for="quantity" class="text-primary">(* )Cantidad:</label>
+  						<input type="number" name="quantity" id="quantity" class="form-control" required />
+					</div>
+					<div class="col-lg-4">
+						<label for="balance" class="text-primary">(*) Saldo Total:</label>
+						<div class="input-group">
+  							<span class="input-group-addon">$</span>
+  							<input type="number" name="balance" id="balance" class="form-control" required />
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<label for="price" class="text-primary">Precio Total:</label>
+						<div class="input-group">
+  							<span class="input-group-addon">$</span>
+  							<input type="number" name="price" id="price" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-12">
+						<hr/>
+					</div>
+					<div class="col-lg-4">
+					</div>
+					<div class="col-lg-4">
+						<label class="text-primary">Saldo X Unidad:</label>
+						<span class="text-warning" id="unity-balance"></span>
+					</div>
+					<div class="col-lg-4">
+						<label for="unity-price" class="text-primary">Precio X Unidad:</label>
+						<div class="input-group">
+  							<span class="input-group-addon">$</span>
+  							<input type="number" name="unity-price" id="unity-price" class="form-control" />
+						</div>
+					</div>
+					<div class="col-md-12">
+						<hr/>
+					</div>
+  				</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<button type="submit" class="btn btn-success">Continuar</button>
+      			</div>
+    		</form>
+  		</div>
+	</div>
+
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title">¿Está Seguro de Eliminar el Producto Actual?</h4>
+      			</div>
+      			<div class="modal-body">
+        			<p>Al eliminar el registro actual no podrá Recuperarlo.</p>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<a href="/home/products/delete/{{doc._id}}" class="btn btn-danger">Eliminar</a>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	<script type="text/javascript">
+	$('input#quantity').on('change keyup',function(){
+		quantity = parseInt($(this).val());
+		balance = parseInt($('input#balance').val());
+		res = (balance)/(quantity);
+		$('span#unity-balance').html('$'+res);
+	});
+
+	$('input#balance').on('change keyup',function(){
+		quantity = parseInt($('input#quantity').val());
+		balance = parseInt($(this).val());
+		res = (balance)/(quantity);
+		$('span#unity-balance').html('$'+res);
+	});
+
+	$('input#price').on('change keyup',function(){
+		price = parseInt($(this).val());
+		balance = parseInt($('input#balance').val());
+		quantity = parseInt($('input#quantity').val());
+
+		priUni = (price)/(quantity);
+		$('input#unity-price').val(priUni);
+
+		if(price<=balance){
+			$(this).attr('class','form-control error-input');
+		}else{
+			$(this).attr('class','form-control success-input');
+		}
+	});
+
+	$('input#unity-price').on('change keyup',function(){
+		uniPri = parseInt($(this).val());
+		quantity = parseInt($('input#quantity').val());
+		uniBal = $('span#unity-balance').text();
+		uniBal = parseInt(uniBal.substring(1,uniBal.length));
+
+		price = (uniPri)*(quantity);
+		$('input#price').val(price);
+
+		if(uniPri<=uniBal){
+			$(this).attr('class','form-control error-input');
+		}else{
+			$(this).attr('class','form-control success-input');
+		}
+	});
+	</script>
+</body>
+</html>

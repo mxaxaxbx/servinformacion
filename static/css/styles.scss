@@ -1,0 +1,203 @@
+//General mixins 
+
+//Clearfix mixin
+@mixin clearfix() {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  } 
+  &:after {
+    clear: both;
+    display: block; 
+    font-size: 0; 
+    height: 0;    
+    visibility: hidden; 
+  }      
+}
+
+//Media query mixin
+@mixin media($type) {
+  @if $type == tablet {/* Small devices (tablets, 768px and up) */
+    @media (min-width: 768px) and (max-width: 991px) {
+      @content;
+    } 
+  }
+  @else if $type == mediumDesktop {/* Medium devices (desktops, 992px and up) */
+    @media (min-width: 992px) and (max-width: 1100px) {
+      @content;
+    }     
+  }
+  @else if $type == largeDesktop {/* Large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+      @content;
+    }       
+  }
+}
+
+//General classes
+.screen-reader-text { /* Reusable, toolbox kind of class */
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.disabled {
+  color: #666; 
+  cursor: default;
+}
+.show {
+  display: inline-block !important;
+}
+
+//General CSS 
+body {
+  margin: 10px 0 0 0;
+  
+  .container {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1em;
+    margin: 0 auto;
+    width: 500px;
+    
+    .player {
+      height: 60px;
+      margin: 0;
+      position: relative;
+      width: 400px;
+      @include media(tablet) {
+        width: 470px;
+      }
+      @include media(mediumDesktop) {
+          width: 470px;
+      }         
+      @include media(largeDesktop) {
+          width: 470px;
+      }                 
+      .play-box {
+          border: 1px solid #d9d9d9;
+          border-radius: 2px;
+          float: left;
+          font-size: 1.5em;
+          height: 50px;
+          margin: 0 10px 0 0;
+          overflow: hidden;
+          position: relative;
+          text-align: center;
+          vertical-align: bottom;
+          width: 54px;
+          #play-audio {
+            cursor: pointer; 
+            display: inline-block;
+            position: relative;
+            top: 20%;
+          }
+          #pause-audio {
+            cursor: pointer;
+            display: none;
+            position: relative;
+            top: 20%;            
+          }                   
+      }//end .play-box
+      .info-box {
+        bottom: 10px;
+        left: 65px;
+        position: absolute;
+        .track-info-box {
+          float: left;
+          font-size: 12px;
+          margin: 0 0 6px 0;
+          width: 400px; 
+          .track-title {
+            display: inline-block;
+          }
+          .audio-time {
+            display: inline-block;
+            padding: 0 0 0 5px;
+            width: 80px;
+          }
+          @include clearfix();
+        }      
+      }
+      .progress-box {
+        float: left;
+        position: relative;
+        width: 275px;
+        .progress-cell {
+          height: 12px;
+          position: relative;
+          .progress {
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            height: 8px;
+            position: relative;
+            width: auto;
+            .progress-buffer {
+              background: #337ab7;
+              height: 100%;
+              width: 0;
+            }
+            .progress-indicator {
+              background: #fff;
+              border: 1px solid #bebebe;
+              border-radius: 3px;
+              cursor: pointer;
+              height: 10px;
+              overflow: hidden;
+              position: absolute;
+              top: -2px;
+              width: 22px;
+            }
+          }
+        }
+      }//end .prgoress-box
+      .controls-box {
+        bottom: 10px;
+        left: 350px;
+        position: absolute; 
+        .audio-volume-box {
+          display: none;
+          @include media(tablet) {
+            display: inline-block;
+          }
+          @include media(mediumDesktop) {
+              display: inline-block;
+          }         
+          @include media(largeDesktop) {
+              display: inline-block;
+          }           
+          .audio-volume {
+            cursor: pointer;
+            display: inline-block;
+          }
+          .audio-volume-slider {
+            display: none;
+            left: -5px;
+            position: absolute;
+            z-index: 1;
+            #audio-volume {
+              margin: 0 !important;
+            }
+          }             
+        }
+     
+      }
+      @include clearfix();
+    }//end .player
+    
+    .playlist {
+      li {
+        a {
+          color: #337ab7;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      li.active {
+          font-weight: bold;
+      }
+    }
+  }//end .container
+}

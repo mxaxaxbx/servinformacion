@@ -1,0 +1,35 @@
+.botonera{
+	margin: 10px auto;
+	text-align: center;
+	font-size: 0;
+	width: 100%;
+}
+.botonera div{
+	overflow: hidden;
+	margin: 0px;
+	display: inline-block;
+	*display: inline;
+	zoom:1;
+}
+.botonera a{
+	display: inline-block;
+	*display: inline;
+	zoom:1;
+	width:auto;
+	height: 20px;
+	margin:2px;
+	color: white;
+	text-decoration: none;
+	line-height: 20px;
+	text-align: center;
+	font-family: arial;
+	font-size: 12px;
+	cursor: pointer;
+	padding:2px;
+}
+.botonera .face a{background: #3b5998}
+.botonera .twit a{background: #2daae1}
+.botonera .goog a{background: #dd4b39}
+.botonera .pint a{background: #ca2128}
+.botonera .mene a{background: #ff6400}
+.botonera .link a{background: #0079bb}

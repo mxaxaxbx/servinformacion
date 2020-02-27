@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Modificar Perfil</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+	{% include 'layouts/nav.html' %}
+	<div class="container">
+		{% include 'layouts/alerts.html' %}
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<h1 class="text-center">Modificar Perfil</h1>
+				</div>
+			</div>
+			<form class="panel-body" action="/home/profile/update" method="POST">
+				<div class="form-group">
+					<label for="email" class="text-primary">(*) Correo Electrónico:</label>
+					<input id="email" class="form-control" value="{{user.email}}" placeholder="Ingrese el nombre del Producto" disabled/>
+				</div>
+				<div class="form-group">
+					<label for="cellphone" class="text-primary">Número de Teléfono Celular:</label>
+					<input type="text" id="cellphone" name="cellphone" class="form-control" value="{{user.cellphone}}" placeholder="Ingrese el número de Teléfono" autofocus/>
+				</div>
+				<div class="form-group">
+					<label for="last_name" class="text-primary">Apellidos:</label>
+					<input type="text" id="last_name" name="last_name" class="form-control" value="{{user.last_name}}" placeholder="Ingrese sus Apellidos"/>
+				</div>
+				<div class="form-group">
+					<label for="name" class="text-primary">(*) Nombres:</label>
+					<input type="text" id="name" name="name" class="form-control" value="{{user.name}}" placeholder="Ingrese sus Nombres" required/>
+				</div>
+				<div class="form-group">
+					<a href="/home" class="btn btn-default">Cancelar</a>
+					<button type="submit" class="btn btn-success pull-right">Guardar Información</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

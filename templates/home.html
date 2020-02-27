@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Inicio</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+	{% include 'layouts/nav.html' %}
+	<div class="container">
+    {% include 'layouts/alerts.html' %}
+  		<div class="col-xs-6">
+    		<div class="thumbnail">
+      			<div class="caption">
+        			<h3>Productos</h3>
+        			<p>{{q_products}} Productos Guardados</p>
+        			<p><a href="/home/products" class="btn btn-primary" role="button">Ver Más</a></p>
+      			</div>
+    		</div>
+  		</div>
+  		<div class="col-xs-6">
+    		<div class="thumbnail">
+      			<div class="caption">
+        			<h3>Proveedores</h3>
+        			<p>{{q_suppliers}} Proveedores registrados</p>
+        			<p><a href="/home/suppliers" class="btn btn-primary" role="button">Ver Más</a></p>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+</body>
+</html>

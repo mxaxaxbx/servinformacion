@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Resultados de {{q}}</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+	{% include 'layouts/nav.html' %}
+	<div class="container">
+		{% include 'layouts/alerts.html' %}
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<h1 class="text-center">Resultados de {{q}}</h1>
+				</div>
+			</div>
+			<div class="panel-body">
+				<h3 class="text-primary">Proveedores:</h3>
+				<i>{{ q_sups }} Resultados</i>
+				<div class="list-group">
+					{% for sup in sups %}
+					<a href="/home/suppliers/edit/{{sup._id}}" class="list-group-item">{{sup.name}}</a>
+					{% endfor %}
+				</div>
+
+				<h3 class="text-primary">Productos:</h3>
+				<i>{{ q_pros }} Resultados</i>
+				<div class="list-group">
+					{% for pro in pros %}
+					<a href="/home/products/edit/{{pro._id}}" class="list-group-item">{{pro.name}}</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
