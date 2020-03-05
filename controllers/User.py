@@ -111,6 +111,8 @@ class User:
 					rows[i]['doc']['latitud'] = coords['results'][0]['geometry']['location']['lat']
 					rows[i]['doc']['longitud'] = coords['results'][0]['geometry']['location']['lng']
 					return self.updateCoords(rows[i]['doc'])
+			else:
+				pass
 
 		json = {
 			'loading':True,
